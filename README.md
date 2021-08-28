@@ -2,6 +2,6 @@
 
 ### `go get github.com/youpps/response`
 
-Simple library for creating a response
+Simple library for creating a responses
 
 

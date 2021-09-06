@@ -20,6 +20,9 @@ func main() {
 	http.HandleFunc("/api/username", func(rw http.ResponseWriter, r *http.Request) {
 		response.Status(rw, 200).String("youpps")
 	})
+	http.HandleFunc("/api/html/username", func(rw http.ResponseWriter, r *http.Request) {
+		response.Status(rw, 200).HTML("<h1>youpps</h1>")
+	})
 	http.HandleFunc("/api/bytes/username", func(rw http.ResponseWriter, r *http.Request) {
 		response.Status(rw, 200).Bytes([]byte("youpps"))
 	})

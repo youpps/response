@@ -89,3 +89,16 @@ func TestCookie(t *testing.T) {
 		t.Fatal("No valid set-cookie header.")
 	}
 }
+
+func TestHTML(t *testing.T) {
+	r := httptest.NewRecorder()
+
+	Status(r, 200).HTML("<h1>HTML</h1>")
+    
+	if r.Body.String() != "<h1>HTML</h1>" {
+		t.Fatal("No valid response body.")
+	}
+	if r.Header().Get("Content-type") != "text/html; charset=UTF-8" {
+		t.Fatal("No valid response header.")
+	}
+}

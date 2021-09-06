@@ -17,6 +17,7 @@ type ResponseWithStatus interface {
 	JSON(J)
 	String(string)
 	Bytes([]byte)
+	HTML(string)
 }
 
 func Status(rw http.ResponseWriter, statusCode int) ResponseWithStatus {
@@ -35,13 +36,21 @@ func (r *responseWithStatus) JSON(jsonMap J) {
 }
 
 func (r *responseWithStatus) Bytes(bytes []byte) {
+	r.rw.Header().Add("Content-Type", "text/plain; charset=UTF-8")
 	r.rw.WriteHeader(r.statusCode)
 	r.rw.Write(bytes)
 }
 
 func (r *responseWithStatus) String(str string) {
+	r.rw.Header().Add("Content-Type", "text/plain; charset=UTF-8")
 	r.rw.WriteHeader(r.statusCode)
 	r.rw.Write([]byte(str))
+}
+
+func (r *responseWithStatus) HTML(html string) {
+	r.rw.Header().Add("Content-Type", "text/html; charset=UTF-8")
+	r.rw.WriteHeader(r.statusCode)
+	r.rw.Write([]byte(html))
 }
 
 func Cookie(rw http.ResponseWriter, cookie *http.Cookie) {
